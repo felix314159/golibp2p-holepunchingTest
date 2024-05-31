@@ -206,7 +206,7 @@ func DiscoverPeers(ctx context.Context, h host.Host) {
 				// ok you successfully connected to new peer, remember this peer (libp2p's who-is-connected-list seems to contain many inactive nodes)
 				myConnectedPeers[peer.ID.String()] = true
 				L.Printf("Connected to: %v", peer.ID.String())
-				L.Printf("List of addresses this node has:")
+				L.Printf("List of addresses that node has:")
 				for _, address := range peer.Addrs {
 					L.Printf("%v", address.String())
 				}
