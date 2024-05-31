@@ -191,7 +191,7 @@ func DiscoverPeers(ctx context.Context, h host.Host) {
 				} 
 				L.Printf("Successfully got relayed connection to node %v\nWill now try to upgrade to direct connection..", peer.ID.String())
 
-				// ---- I NEED HELP WITH THE FOLLOWING PART (it keeps saying that all dials failed due to black hole, then it timeouts in less than 1 sec cuz of no network activity) ----
+				// ---- I NEED HELP WITH THE FOLLOWING PART (it keeps saying: "error": "failed to open hole-punching stream: failed to negotiate protocol: protocols not supported: [/libp2p/dcutr]") but when i use libp2p-lookup dht --network ipfs --peer-id <nodeID> it tells me that that protocol is supported [and everyone else is able to holepunch too, so this code must be wrong] ----
 
 				// try to establish direct connection (not relayed connection)
 	    		
