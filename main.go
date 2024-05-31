@@ -19,7 +19,7 @@ import (
 	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
 	"github.com/libp2p/go-libp2p/core/crypto"
 	"github.com/libp2p/go-libp2p/core/host"
-	"github.com/libp2p/go-libp2p/core/network"
+	//"github.com/libp2p/go-libp2p/core/network"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
 )
@@ -193,8 +193,8 @@ func DiscoverPeers(ctx context.Context, h host.Host) {
 
 				// ---- I NEED HELP WITH THE FOLLOWING PART (it keeps saying: "error": "failed to open hole-punching stream: failed to negotiate protocol: protocols not supported: [/libp2p/dcutr]") but when i use libp2p-lookup dht --network ipfs --peer-id <nodeID> it tells me that that protocol is supported [and everyone else is able to holepunch too, so this code must be wrong] ----
 
+				/* maybe you should not manually try to do that because it is supposed to happen automatically?
 				// try to establish direct connection (not relayed connection)
-	    		
 				err = holePunchConnect(ctx, h, peer, true)
 				if err != nil {
 					L.Printf("Failed to upgrade to direct connection: %v", err)
@@ -202,14 +202,17 @@ func DiscoverPeers(ctx context.Context, h host.Host) {
 					L.Printf("Successfully holepunched to upgrade to direct connection with %v", peer.ID.String())
 					break
 				}
+				*/
 
 				// ok you successfully connected to new peer, remember this peer (libp2p's who-is-connected-list seems to contain many inactive nodes)
 				myConnectedPeers[peer.ID.String()] = true
 				L.Printf("Connected to: %v", peer.ID.String())
-				L.Printf("List of addresses that node has:")
-				for _, address := range peer.Addrs {
-					L.Printf("%v", address.String())
-				}
+				//L.Printf("List of addresses this node has:")
+				//for _, address := range peer.Addrs {
+				//	L.Printf("%v", address.String())
+				//}
+
+
 				// Note: This list does not seem to be complete and also does not include any relay addresses (that will be used by other nodes to then holepunch upgrade to a direct connection)
 				// For instance, it might print:
 						// /ip4/127.0.0.1/tcp/52129/p2p/12D3KooWCT6VdL7XEyBZVwNn5PmeFV1BZ9vaiQCGqN5i6qxgTLdB
@@ -233,6 +236,7 @@ func DiscoverPeers(ctx context.Context, h host.Host) {
 	}
 }
 
+/*
 // holePunchConnect tries to upgrade relayed connection to direct connection
 // Mainly taken from here: https://github.com/libp2p/go-libp2p/blob/master/p2p/protocol/holepunch/util.go#L67
 func holePunchConnect(ctx context.Context, host host.Host, pi peer.AddrInfo, isClient bool) error {
@@ -247,6 +251,7 @@ func holePunchConnect(ctx context.Context, host host.Host, pi peer.AddrInfo, isC
 
 	return nil
 }
+*/
 
 // InitDHT connects to a few known default bootstrap nodes (they enable distributed node discovery and are the only centralized necessity in kademlia DHT).
 func InitDHT(ctx context.Context, h host.Host) *dht.IpfsDHT {
