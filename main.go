@@ -44,7 +44,7 @@ var L *log.Logger
 // Scenario 2 [sad ending] (the two nodes are not in the same LAN): after a while they find each other, but they never receive each others topic messages. A few (unrelated?) holepunching successes are printed and no holepunching failure. But when I use vole to ping vole shows success (took x ms), but the other node prints holepunching error: "error": "failed to open hole-punching stream: connection failed"
 
 // Is anyone able to find the flaw in scenario 2? Does it work with your setup? My setup is 1 node is using mobile data usb tethered (to not be in same network), the other node uses normal ethernet connection.
-func mainMinimalExample() {
+func mainPubsubExample() {
 	// set up logger
 	L = log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
@@ -176,7 +176,7 @@ func mainMinimalExample() {
 	// run code with two nodes and just wait a few min, as soon as the the nodes find each other you start seeing their topic messages
 }
 
-func mainPubsubExample() {
+func mainMinimalExample() {
 	// set up logger
 	L = log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
