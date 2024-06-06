@@ -291,7 +291,9 @@ func mainChatExample() {
 
 	// connect to one peer (program will not continue until this happens)
 	DiscoverPeers(ctx, h)
-	L.Printf("Peer discovery complete. Will start sending chat messages.")
+	L.Printf("Peer discovery complete. Will start sending chat messages in 30 sec.")
+	time.Sleep(30 * time.Second) // reason: due to asymmetrical 'connected to:' give other node some time to connect otherwise you will try to send and crash with context deadline exceeded
+
 
     // repeatedly send your node ID as chat message to the first peer you connected to
 	go ChatSendRepeatedly([]byte(myNodeID), firstConnectedNodeAddress, h, ctx)
